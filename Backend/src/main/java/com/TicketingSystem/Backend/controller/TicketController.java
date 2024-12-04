@@ -10,7 +10,7 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @GetMapping("/tickets/available")
+    @GetMapping("/tickets")
     public String getTickets() { //fetch tickets
         return ticketService.getAvailableTickets ();
     }
