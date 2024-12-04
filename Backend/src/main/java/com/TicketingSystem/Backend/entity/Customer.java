@@ -7,6 +7,11 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class Customer implements Runnable{
     private TicketPoolService ticketPoolService;
+    private boolean running = true;
+
+    public void stop(){
+        running = false;
+    }
 
     @Autowired
     public Customer(TicketPoolService ticketPoolService) {
@@ -15,7 +20,7 @@ public class Customer implements Runnable{
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
+        while (running) {
             try{
                 TimeUnit.SECONDS.sleep (3);
                 if (ticketPoolService.purchaseTicket ()){
@@ -24,9 +29,9 @@ public class Customer implements Runnable{
                     System.out.println("No tickets available. Customer Waiting...");
                 }
             }catch (InterruptedException e){
-                System.out.println("Customer interrupted");
+                System.out.println("Customer interrupted.");
+                running=false;
                 Thread.currentThread ().interrupt ();
-                break;
             }
         }
     }
