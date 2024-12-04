@@ -9,10 +9,6 @@ public class Customer implements Runnable{
     private TicketPoolService ticketPoolService;
     private boolean running = true;
 
-    public void stop(){
-        running = false;
-    }
-
     @Autowired
     public Customer(TicketPoolService ticketPoolService) {
         this.ticketPoolService = ticketPoolService;
@@ -24,7 +20,7 @@ public class Customer implements Runnable{
             try{
                 TimeUnit.SECONDS.sleep (3);
                 if (ticketPoolService.purchaseTicket ()){
-                    System.out.println("Ticket purchased");
+                    System.out.print("");
                 }else {
                     System.out.println("No tickets available. Customer Waiting...");
                 }

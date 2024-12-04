@@ -14,17 +14,12 @@ public class Vendor implements Runnable {
         this.ticketPoolService = ticketPoolService;
     }
 
-    public void stop(){
-        running=false;
-    }
-
     @Override
     public void run() {
         while (running) {
             try{
                 TimeUnit.SECONDS.sleep (2);
                 ticketPoolService.addTickets (10);
-                System.out.println ("Vendor added tickets. Total tickets available:"+ ticketPoolService.getAvailableTickets ());
             }catch (InterruptedException e){
                 System.out.println ("Vendor interrupted.stopping...");
                 running=false;

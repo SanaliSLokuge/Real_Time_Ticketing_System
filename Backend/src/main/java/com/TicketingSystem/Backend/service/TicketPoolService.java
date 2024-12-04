@@ -29,7 +29,7 @@ public class TicketPoolService {
             for (int i = 0; i < count; i++) {
                 ticketsQueue.add(new Ticket ());
             }
-            System.out.println (count + " tickets added to the pool. Total tickets available:" + ticketsQueue.size ());
+            System.out.println ("vendor added "+count + " tickets to the pool. Total tickets available:" + ticketsQueue.size ());
         }else{
             System.out.println ("Pool is full.Cannot add tickets.Try again later.");
         }
