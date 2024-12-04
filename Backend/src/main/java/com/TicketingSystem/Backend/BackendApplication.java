@@ -18,7 +18,7 @@ public class BackendApplication  implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		simulationController.start ();
-		Thread.sleep (5000);
+		Thread.sleep (10000);
 		simulationController.stop ();
 		System.out.println("Simulation stopped.");
 	}

@@ -25,11 +25,17 @@ public class SimulationController {
         customerThread.start();
         System.out.println("Simulation starting.");
     }
-    public void stop(){
-        if (vendorThread.isAlive() && customerThread.isAlive()){
-            vendorThread.interrupt();
-            customerThread.interrupt();
-            System.out.println("Simulation stopping.");
+    public void stop() {
+        try {
+            if (vendorThread.isAlive ()) {
+                vendorThread.interrupt ();  // Interrupt vendor thread
+            }
+            if (customerThread.isAlive ()) {
+                customerThread.interrupt ();  // Interrupt customer thread
+            }
+            System.out.println ("Simulation stopping.");
+        } catch (Exception e) {
+            e.printStackTrace ();
         }
     }
 }

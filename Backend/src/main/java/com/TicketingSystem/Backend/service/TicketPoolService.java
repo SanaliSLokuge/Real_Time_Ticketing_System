@@ -1,4 +1,7 @@
 package com.TicketingSystem.Backend.service;
+
+import com.TicketingSystem.Backend.entity.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.TicketingSystem.Backend.entity.Ticket;
 import org.springframework.stereotype.Service;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -7,24 +10,27 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class TicketPoolService {
     private ConcurrentLinkedQueue<Ticket> ticketsQueue;
     private int maxTicketsCapacity;
+    private Configuration configuration;
 
-    public TicketPoolService() {
+    @Autowired
+    public TicketPoolService(Configuration configuration) {
         this.ticketsQueue= new ConcurrentLinkedQueue<>();
-        this.maxTicketsCapacity = 100;
+        this.configuration = configuration;
+        this.maxTicketsCapacity = configuration.getMaxTicketCapacity();
     }
-    public synchronized boolean purchaseTicket() {
-        if (ticketsQueue.size () > 0) {
+    public boolean purchaseTicket() {
+        if (ticketsQueue.size() > 0) {
             Ticket ticket = ticketsQueue.poll();
             if (ticket != null) {
-                ticket.setStatus ("Not Available");
-                System.out.println ("Ticket Purchased: "+ticket);
+                ticket.setStatus("Sold");
+                System.out.println("Ticket Purchased: " + ticket);
                 return true;
             }
         }
         System.out.println("No tickets available. Customer Waiting...");
         return false;
     }
-    public synchronized void addTickets(int count) {
+    public void addTickets(int count) {
         if (ticketsQueue.size ()+count <= maxTicketsCapacity) {
             for (int i = 0; i < count; i++) {
                 ticketsQueue.add(new Ticket ());
@@ -34,7 +40,7 @@ public class TicketPoolService {
             System.out.println ("Pool is full.Cannot add tickets.Try again later.");
         }
     }
-    public synchronized int getAvailableTickets() {
+    public int getAvailableTickets() {
         return ticketsQueue.size();
     }
 }

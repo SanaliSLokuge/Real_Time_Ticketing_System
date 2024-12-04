@@ -18,7 +18,7 @@ public class Customer implements Runnable{
     public void run() {
         while (running) {
             try{
-                TimeUnit.SECONDS.sleep (3);
+                TimeUnit.SECONDS.sleep (1);
                 if (ticketPoolService.purchaseTicket ()){
                     System.out.print("");
                 }else {
