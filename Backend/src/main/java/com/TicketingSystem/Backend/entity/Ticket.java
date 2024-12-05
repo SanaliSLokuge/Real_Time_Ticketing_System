@@ -1,8 +1,12 @@
 package com.TicketingSystem.Backend.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import org.springframework.stereotype.Component;
 
+//@Entity
+//@Table(name = "tciekts")
+@Component
 public class Ticket {
     private int ticketId;
     private static int ticketCounter=1;
