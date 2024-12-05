@@ -6,24 +6,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Configuration {
-    @NotNull
-    @Min(1)
-    private int maxTicketsByVendor ;
+    @NotNull(message = "Max Tickets by Vendor cannot be null")
+    @Min(value = 1, message = "Max Tickets by Vendor must be greater than 0")
+    private int maxTicketsByVendor;
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "Ticket Release Rate cannot be null")
+    @Min(value = 1, message = "Ticket Release Rate must be greater than 0")
     private int ticketReleaseRate;
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "Max Tickets by Customer cannot be null")
+    @Min(value = 1, message = "Max Tickets by Customer must be greater than 0")
     private int maxTicketsByCustomer;
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "Ticket Retrieval Rate cannot be null")
+    @Min(value = 1, message = "Ticket Retrieval Rate must be greater than 0")
     private int ticketRetrievalRate;
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "Max Ticket Capacity cannot be null")
+    @Min(value = 1, message = "Max Ticket Capacity must be greater than 0")
     private int maxTicketCapacity;
 
     public int getMaxTicketsByVendor() {
